@@ -29,9 +29,12 @@ public class Tester {
 	@Test
 	public void fn() throws Exception {
 		
-		String result = EncryptionProvider.encryptionByAES("1312312321");
+		String result = EncryptionProvider.encryptByAES("1312312321");
 		System.out.println(result);
+		String urlEncoded = java.net.URLEncoder.encode(result, "UTF-8");
+		System.out.println("http://xxxxx?verify=" + urlEncoded);
 		
+		System.out.println(EncryptionProvider.descryptByAES(java.net.URLDecoder.decode(urlEncoded, "UTF-8")));
 	}
 	
 }

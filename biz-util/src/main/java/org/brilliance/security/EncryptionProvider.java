@@ -53,7 +53,7 @@ public class EncryptionProvider {
 	 * @throws IllegalBlockSizeException 
 	 * @throws InvalidAlgorithmParameterException 
 	 */
-	public static String encryptionByAES(byte[] rawKey, String input) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException  {
+	public static String encryptByAES(byte[] rawKey, String input) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException  {
 		
 		SecretKeySpec skeySpec = new SecretKeySpec(rawKey, "AES");
 		Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -76,9 +76,44 @@ public class EncryptionProvider {
 	 * @throws NoSuchAlgorithmException 
 	 * @throws InvalidKeyException 
 	 */
-	public static String encryptionByAES(String input) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
-		return encryptionByAES(_AES_KEY_DEFAULT.getBytes(), input);
+	public static String encryptByAES(String input) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		return encryptByAES(_AES_KEY_DEFAULT.getBytes(), input);
 	}
-		
 	
+	/**
+	 * 
+	 * @param rawKey
+	 * @param input
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws NoSuchPaddingException
+	 * @throws InvalidKeyException
+	 * @throws InvalidAlgorithmParameterException
+	 * @throws IllegalBlockSizeException
+	 * @throws BadPaddingException
+	 */
+	public static String descryptByAES(byte[] rawKey, String input) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
+		
+		SecretKeySpec skeySpec = new SecretKeySpec(rawKey, "AES");  
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");  
+		IvParameterSpec iv = new IvParameterSpec(_AES_IV.getBytes());
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);  
+        byte[] encrypted = cipher.doFinal(Base64.decodeBase64(input));  
+        return new String(encrypted);
+	}
+	
+	/**
+	 * 
+	 * @param input
+	 * @return
+	 * @throws BadPaddingException 
+	 * @throws IllegalBlockSizeException 
+	 * @throws InvalidAlgorithmParameterException 
+	 * @throws NoSuchPaddingException 
+	 * @throws NoSuchAlgorithmException 
+	 * @throws InvalidKeyException 
+	 */
+	public static String descryptByAES(String input) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
+		return descryptByAES(_AES_KEY_DEFAULT.getBytes(), input);
+	}
 }
