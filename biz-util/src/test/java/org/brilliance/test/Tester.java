@@ -17,6 +17,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.brilliance.security.EncryptionProvider;
+import org.brilliance.web.verification.EmailUtils;
 import org.junit.Test;
 
 /**
@@ -29,12 +30,19 @@ public class Tester {
 	@Test
 	public void fn() throws Exception {
 		
-		String result = EncryptionProvider.encryptByAES("1312312321");
+		String result = EncryptionProvider.encryptByAES("113123");
 		System.out.println(result);
 		String urlEncoded = java.net.URLEncoder.encode(result, "UTF-8");
 		System.out.println("http://xxxxx?verify=" + urlEncoded);
 		
 		System.out.println(EncryptionProvider.descryptByAES(java.net.URLDecoder.decode(urlEncoded, "UTF-8")));
+	}
+	
+	@Test
+	public void fn1() throws Exception {
+		
+		EmailUtils.sendHtmlEmail();
+		
 	}
 	
 }
