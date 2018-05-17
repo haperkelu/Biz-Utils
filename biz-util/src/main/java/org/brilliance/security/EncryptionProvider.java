@@ -94,7 +94,7 @@ public class EncryptionProvider {
 	 */
 	public static String descryptByAES(byte[] rawKey, String input) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException{
 		
-		SecretKeySpec skeySpec = new SecretKeySpec(rawKey, "AES");  
+		SecretKeySpec skeySpec = new SecretKeySpec(rawKey, "AES");         
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");  
 		IvParameterSpec iv = new IvParameterSpec(_AES_IV.getBytes());
         cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);  
