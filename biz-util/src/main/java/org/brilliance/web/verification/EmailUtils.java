@@ -1,11 +1,12 @@
 /**   
  * @Title: EmailUtils.java 
  * @Package org.brilliance.web.verification 
- * @Description: 
+ * @Description:     
  * @author Pie.Li   
  * @date 2013-12-15 下午4:51:43 
- * @version V1.0   
+ * @version V1.0         
  */
+ 
 package org.brilliance.web.verification;
 
 import org.apache.commons.mail.DefaultAuthenticator;
